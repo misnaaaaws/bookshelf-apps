@@ -62,7 +62,7 @@ function addBook() {
   const id = generateId();
   const title = document.getElementById("title").value;
   const author = document.getElementById("author").value;
-  const year = document.getElementById("year").value;
+  const year = parseInt(document.getElementById("year").value, 10);
   const isCompleted = document.getElementById("complete").checked;
 
   const book = generateTodoObject(id, title, author, year, isCompleted);
@@ -202,7 +202,8 @@ function editBook(idBook) {
   
     const newTitle = prompt("Enter new title", book.title);
     const newAuthor = prompt("Enter new author", book.author);
-    const newYear = prompt("Enter new year", book.year);
+    const newYearString = prompt("Enter new year", book.year.toString());
+    const newYear = parseInt(newYearString, 10)
   
     if (newTitle !== null && newAuthor !== null && newYear !== null) {
       book.title = newTitle;
