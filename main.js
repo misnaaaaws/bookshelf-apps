@@ -22,13 +22,13 @@ function generateId() {
   return +new Date();
 }
 
-function generateTodoObject(id, title, author, year, isCompleted) {
+function generateTodoObject(id, title, author, year, isComplete) {
   return {
     id,
     title,
     author,
     year,
-    isCompleted,
+    isComplete,
   };
 }
 
@@ -60,17 +60,28 @@ function loadStorageData() {
 
 function addBook() {
   const id = generateId();
-  const title = document.getElementById("title").value;
-  const author = document.getElementById("author").value;
-  const year = parseInt(document.getElementById("year").value, 10);
-  const isCompleted = document.getElementById("complete").checked;
+  const titleInput = document.getElementById("title");
+  const authorInput = document.getElementById("author");
+  const yearInput = document.getElementById("year");
+  const completeCheckbox = document.getElementById("complete");
 
-  const book = generateTodoObject(id, title, author, year, isCompleted);
+  const title = titleInput.value;
+  const author = authorInput.value;
+  const year = parseInt(yearInput.value, 10);
+  const isComplete = completeCheckbox.checked;
+
+  const book = generateTodoObject(id, title, author, year, isComplete);
   bookshelf.push(book);
+
+  titleInput.value = "";
+  authorInput.value = "";
+  yearInput.value = "";
+  completeCheckbox.checked = false;
 
   document.dispatchEvent(new Event(RENDER_EVENT));
   saveData();
 }
+
 
 document.addEventListener(RENDER_EVENT, function () {
   const unfinishedBookshelf = document.getElementById("incompleteBookshelfList");
@@ -82,7 +93,7 @@ document.addEventListener(RENDER_EVENT, function () {
   for (const book of bookshelf) {
     const bookItem = makeBook(book);
 
-    if (!book.isCompleted) unfinishedBookshelf.append(bookItem);
+    if (!book.isComplete) unfinishedBookshelf.append(bookItem);
     else finishedBookshelf.append(bookItem);
   }
 });
@@ -105,7 +116,7 @@ function makeBook(book) {
   const buttonAction = document.createElement("div");
   buttonAction.classList.add("action");
 
-  if (book.isCompleted) {
+  if (book.isComplete) {
     const finishedBook = document.createElement("button");
     finishedBook.classList.add("green");
     finishedBook.innerHTML = "Unfinished";
@@ -157,7 +168,7 @@ function addBookToFinished(idBook) {
 
   if (book === null) return;
 
-  book.isCompleted = true;
+  book.isComplete = true;
   document.dispatchEvent(new Event(RENDER_EVENT));
   saveData();
 }
@@ -167,7 +178,7 @@ function addBookToUnfinished(idBook) {
 
   if (book === null) return;
 
-  book.isCompleted = false;
+  book.isComplete = false;
   document.dispatchEvent(new Event(RENDER_EVENT));
   saveData();
 }
@@ -222,15 +233,18 @@ function editBook(idBook) {
     finishedBookshelf.innerHTML = "";
     
     for (const book of bookshelf) {
-      const bookItem = makeBook(book);
-  
       if (
         book.title.toLowerCase().includes(keyword) ||
         book.author.toLowerCase().includes(keyword) ||
-        book.year.includes(keyword)
-      ) {
-        if (!book.isCompleted) unfinishedBookshelf.append(bookItem);
-        else finishedBookshelf.append(bookItem);
+        book.year.toString().includes(keyword)
+        ) {
+        const bookItem = makeBook(book);
+
+        if (!book.isComplete) {
+          unfinishedBookshelf.append(bookItem);
+        } else {
+          finishedBookshelf.append(bookItem);
+        }
       }
     }
   }
