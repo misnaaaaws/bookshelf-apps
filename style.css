@@ -1,0 +1,171 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body, input, button {
+    font-family: 'Poppins', sans-serif;
+}
+
+header{
+    display: flex;
+    background-color: #eca4b0;
+    padding: 12px;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.input-book{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input-book h2{
+    padding: 10px;
+    color: #eca4b0;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.input-box{
+    display: flex;
+    width: 100%;
+    gap: 32px;
+}
+
+.input{
+    display: flex;
+    flex-direction: column;
+}
+
+.input input{
+    padding: 10px;
+}
+
+.submit-btn{
+    padding: 5px 10px;
+    width: 20%;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #eca4b0;
+    border: none;
+    border-radius: 5px;
+}
+
+.search-box{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px;
+    margin-top: 20px;
+    color: #eca4b0;
+    font-weight: bold;
+}
+
+.search-box input{
+    padding: 10px;
+    width: 70%;
+
+}
+
+.book-category{
+    display: flex;
+    width: 100%;
+    align-items: flex-start;
+    gap: 64px;
+    padding: 20px;
+    justify-content: center;
+}
+
+.book-shelf{
+    width: 40%;
+    text-align: center;
+    background-color: white;
+    color: #eca4b0;
+    border-radius: 10px;
+}
+
+.book-shelf h2{
+    padding: 15px;
+    text-align: center;
+    background-color: white;
+    color: #eca4b0;
+    border: 1px solid #eca4b0;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+
+.book_item{
+    width: 100%;
+    padding: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    color: black;
+    text-align: left;
+    margin-top: 20px;
+}
+
+.action{
+    display: flex;
+    gap: 10px;
+}
+
+.green,
+.red,
+.blue{
+    padding: 10px;
+    color: white;
+    border: none;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.green{
+    background-color: green;
+}
+
+.red{
+    background-color: red;
+}
+
+.blue{
+    background-color: orange;
+}
+
+@media screen and (max-width: 426px) {
+    form{
+        width: 80%;
+    }
+    .input-box{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .submit-btn{
+        width: 100%;
+    }
+
+    .book-category{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .book-shelf{
+        width: 100%;
+    }
+}
